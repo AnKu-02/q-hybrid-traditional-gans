@@ -1,0 +1,47 @@
+# QStyleGAN Configuration - Baseline 128×128
+
+# Model parameters
+latent_dim: 512              # Latent code dimension
+style_dim: 512               # Style vector dimension
+n_classes: 6                 # Number of defect classes
+image_size: 128              # Output image size
+use_quantum: true            # Enable quantum module
+n_qubits: 8                  # Number of qubits for quantum circuit
+
+# Training parameters
+batch_size: 32               # Batch size
+learning_rate: 0.002         # Learning rate
+lr_g: 0.002                  # Generator learning rate
+lr_d: 0.002                  # Discriminator learning rate
+beta1: 0.0                   # Adam beta1 (momentum)
+beta2: 0.99                  # Adam beta2 (momentum)
+
+# Regularization
+r1_gamma: 10.0               # R1 gradient penalty weight
+d_iters: 1                   # Discriminator iterations per step
+gp_interval: 16              # Gradient penalty application interval
+
+# Training schedule
+num_epochs: 100              # Total training epochs
+checkpoint_interval: 10      # Save checkpoint every N epochs
+eval_interval: 10            # Evaluate every N epochs
+
+# Data
+data_dir: data/NEU_baseline_128
+train_split: train
+val_split: validation
+num_workers: 4
+
+# Logging
+log_interval: 100            # Log every N steps
+sample_interval: 500         # Generate samples every N steps
+num_samples: 36              # Number of samples to generate
+
+# Advanced
+use_mixed_precision: false   # Use automatic mixed precision
+progressive_training: false  # Enable progressive training
+augmentation_prob: 0.15      # Probability for data augmentation
+
+# Output
+output_dir: runs/qstylegan_baseline_128
+save_best: true              # Save best model based on FID
