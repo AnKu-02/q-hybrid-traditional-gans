@@ -1,0 +1,43 @@
+# ============================================================================
+# Conditional GAN Config: NEU-DET Baseline (128x128)
+# ============================================================================
+# Paper: "Conditional Generative Adversarial Nets" (Mirza & Osindski, 2014)
+# https://arxiv.org/abs/1411.1784
+#
+# Dataset: NEU-DET Baseline (Original images)
+# - 6 defect classes
+# - 128x128 grayscale images
+# - Original defect detection dataset
+
+# Dataset Configuration
+metadata_path: "data/NEU_baseline_128/metadata.csv"
+image_dir: "data/NEU_baseline_128"
+num_classes: 6
+img_size: 128
+
+# Training Configuration
+num_epochs: 20
+batch_size: 32
+learning_rate_g: 0.0002
+learning_rate_d: 0.0002
+beta1: 0.5  # Adam optimizer
+beta2: 0.999
+seed: 42
+device: "cpu"  # CPU is quieter for Mac
+
+# Model Architecture
+latent_dim: 100
+base_channels: 64
+
+# Checkpointing & Logging
+sample_interval: 5  # Generate sample grid every N epochs
+checkpoint_interval: 5  # Save checkpoint every N epochs
+num_sample_images: 36  # Grid of 6x6 samples
+
+# Regularization
+use_gradient_penalty: false
+lambda_gp: 10.0
+
+# Output
+run_name: "cgan_baseline_128"
+output_dir: "runs/cgan_baseline_128"

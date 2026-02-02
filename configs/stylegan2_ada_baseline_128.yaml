@@ -1,0 +1,46 @@
+# StyleGAN2-ADA Configuration for NEU Dataset (128x128)
+# Based on: https://github.com/NVlabs/stylegan2-ada-pytorch
+
+# Dataset Configuration
+metadata_path: "data/NEU_baseline_128/metadata.csv"
+image_dir: "data/NEU_baseline_128"
+num_classes: 6  # crazing, inclusion, patches, pitted_surface, rolled-in_scale, scratches
+img_size: 128
+
+# Model Architecture
+z_dim: 512              # Latent dimension (noise input)
+w_dim: 512              # Style dimension (intermediate latent)
+fmap_base: 16384        # Base feature maps (will be downscaled for 128x128)
+fmap_max: 512           # Maximum feature maps per layer
+fmap_decay: 1.0         # Feature map decay rate
+
+# Training Configuration
+num_epochs: 20          # Epochs (can extend later)
+batch_size: 32          # Batch size (CPU-friendly)
+num_workers: 0          # Parallel data loading
+learning_rate_g: 0.0025 # Generator learning rate
+learning_rate_d: 0.0025 # Discriminator learning rate
+betas: [0.0, 0.99]      # Adam momentum parameters
+eps: 1.0e-8             # Adam epsilon
+
+# Regularization
+use_ada: true           # Adaptive Discriminator Augmentation
+ada_target: 0.6         # ADA target for augmentation probability
+ada_interval: 4         # Update ADA every N iterations
+ada_kimg_base: 100      # Base k-images for ADA scheduling
+
+use_r1: true            # R1 gradient penalty
+r1_gamma: 10.0          # R1 regularization strength
+
+path_length_decay: 0.01 # Path length regularization decay
+
+# Checkpointing & Logging
+checkpoint_interval: 5  # Save checkpoint every N epochs
+sample_interval: 5      # Generate samples every N epochs
+log_interval: 100       # Log metrics every N iterations
+run_name: "stylegan2_ada_baseline_128"
+output_dir: "runs/stylegan2_ada_baseline_128"
+
+# Hardware Configuration
+device: "cpu"           # "cuda", "cpu", or "mps"
+seed: 42                # Random seed for reproducibility

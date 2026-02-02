@@ -1,0 +1,43 @@
+# Quantum Conditional GAN Configuration
+# ==========================================
+
+# Dataset
+metadata_path: "data/NEU_baseline_128/metadata.csv"
+image_dir: "data/NEU_baseline_128"
+num_classes: 6
+img_size: 128
+
+# Quantum settings
+num_qubits: 8              # Number of qubits (8 is good balance)
+quantum_depth: 4           # Circuit depth (layers of quantum gates)
+measurement_samples: 1000  # Shots for quantum measurement
+quantum_backend: "simulator"
+use_pennylane: true        # Use PennyLane quantum framework
+
+# Classical architecture
+z_dim: 32                  # Latent noise dimension
+hidden_dim: 256            # Hidden layer dimension
+quantum_feature_dim: 256   # Quantum feature space dimension
+
+# Training
+num_epochs: 20
+batch_size: 16             # Smaller batch due to quantum cost
+num_workers: 0
+learning_rate_g: 0.001
+learning_rate_d: 0.001
+betas: [0.5, 0.999]
+eps: 1e-8
+
+# Quantum-classical hybrid
+quantum_ratio: 0.5         # Mix ratio of quantum vs classical
+parameter_shift_rule: true # Use parameter shift rule for gradients
+
+# Checkpointing & Logging
+checkpoint_interval: 5
+sample_interval: 5
+run_name: "qcgan_baseline_128"
+output_dir: "runs/qcgan_baseline_128"
+
+# Hardware
+device: "cpu"              # CPU for quantum simulator
+seed: 42
